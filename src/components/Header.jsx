@@ -5,9 +5,11 @@ const headerStyles = {
 
 const Header = () => {
   return (
-    <div className='container' style={headerStyles}>
-      <h1>Feedback UI</h1>
-    </div>
+    <header style={headerStyles}>
+      <div className='container'>
+        <h1>Feedback UI</h1>
+      </div>
+    </header>
   );
 };
 
