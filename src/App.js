@@ -8,7 +8,11 @@ function App() {
   const [feedback, setFeedback] = useState(feedbackData);
 
   const deleteItemHandler = (id) => {
-    console.log(id);
+    if (window.confirm("Are you sure you want to delete?")) {
+      // filter feedback to act as a delete
+      const filteredFeedback = feedback.filter((item) => item.id !== id);
+      setFeedback(filteredFeedback);
+    }
   };
 
   return (
