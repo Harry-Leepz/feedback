@@ -1,6 +1,6 @@
 import FeedbackItem from "./FeedbackItem";
 
-const FeedbackList = ({ data }) => {
+const FeedbackList = ({ data, onDeleteItem }) => {
   if (!data || data.length === 0) {
     return <p>No Feedback Yet...</p>;
   }
@@ -8,7 +8,7 @@ const FeedbackList = ({ data }) => {
   return (
     <div className='feedback-list'>
       {data.map((item) => (
-        <FeedbackItem key={item.id} item={item} />
+        <FeedbackItem key={item.id} item={item} onDeleteItem={onDeleteItem} />
       ))}
     </div>
   );
