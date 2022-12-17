@@ -7,12 +7,8 @@ const FeedbackList = ({ data }) => {
 
   return (
     <div className='feedback-list'>
-      {data.map((feedback) => (
-        <FeedbackItem
-          key={feedback.id}
-          rating={feedback.rating}
-          text={feedback.text}
-        />
+      {data.map((item) => (
+        <FeedbackItem key={item.id} item={item} />
       ))}
     </div>
   );

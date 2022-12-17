@@ -1,14 +1,14 @@
 import Card from "./shared/Card";
 import { FaTimesCircle } from "react-icons/fa";
 
-const FeedbackItem = ({ text, rating }) => {
+const FeedbackItem = ({ item }) => {
   return (
     <Card>
-      <div className='num-display'>{rating}</div>
+      <div className='num-display'>{item.rating}</div>
       <button className='close'>
         <FaTimesCircle color='black' />
       </button>
-      <div className='text-display'>{text}</div>
+      <div className='text-display'>{item.text}</div>
     </Card>
   );
 };
