@@ -20,7 +20,8 @@ function App() {
 
   const addItemHandler = (newFeedback) => {
     newFeedback.id = uuidv4();
-    console.log(newFeedback);
+    // using spread operator to add the new feedback to the previous state
+    setFeedback([newFeedback, ...feedback]);
   };
 
   return (
