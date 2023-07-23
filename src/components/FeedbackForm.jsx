@@ -7,6 +7,7 @@ const FeedbackForm = () => {
   const [text, setText] = useState("");
   const [isDisabled, setIsDisabled] = useState(true);
   const [message, setMessage] = useState("");
+  const [rating, setRating] = useState(10);
 
   const textInputHandler = (event) => {
     setText(event.target.value);
@@ -24,11 +25,23 @@ const FeedbackForm = () => {
     }
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    if (text.trim().length > 10) {
+      const newFeedback = {
+        text,
+        rating,
+      };
+      console.log(newFeedback);
+    }
+  };
+
   return (
     <Card>
-      <form>
+      <form onSubmit={handleSubmit}>
         <h2>How would you rate your service with us ?</h2>
-        <RatingSelect select={(rating) => console.log(rating)} />
+        <RatingSelect select={(rating) => setRating(rating)} />
         <div className='input-group'>
           <input
             onChange={textInputHandler}
