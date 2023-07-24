@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from "uuid"; // generate custom id for adding new feedback
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { useState } from "react";
 import Header from "./components/Header";
 import FeedbackList from "./components/FeedbackList";
@@ -27,12 +28,28 @@ function App() {
 
   return (
     <div className='App'>
-      <Header />
-      <div className='container'>
-        <FeedbackForm onAddItem={addItemHandler} />
-        <FeedbackStats data={feedback} />
-        <FeedbackList data={feedback} onDeleteItem={deleteItemHandler} />
-      </div>
+      <Router>
+        <Header />
+        <div className='container'>
+          <Routes>
+            <Route
+              exact
+              path='/'
+              element={
+                <>
+                  <FeedbackForm onAddItem={addItemHandler} />
+                  <FeedbackStats data={feedback} />
+                  <FeedbackList
+                    data={feedback}
+                    onDeleteItem={deleteItemHandler}
+                  />
+                </>
+              }
+            ></Route>
+            <Route path='/about' element={<About />} />
+          </Routes>
+        </div>
+      </Router>
     </div>
   );
 }
