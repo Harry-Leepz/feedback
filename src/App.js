@@ -44,12 +44,12 @@ function App() {
                     data={feedback}
                     onDeleteItem={deleteItemHandler}
                   />
+                  <AboutIconLink />
                 </>
               }
             ></Route>
             <Route path='/about' element={<About />} />
           </Routes>
-          <AboutIconLink />
         </div>
       </Router>
     </div>
