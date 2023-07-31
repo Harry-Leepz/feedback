@@ -5,7 +5,8 @@ import Button from "./shared/Button";
 import RatingSelect from "./RatingSelect";
 
 const FeedbackForm = () => {
-  const { addFeedback, feedbackEdit } = useContext(FeedbackContext);
+  const { addFeedback, feedbackEdit, updateFeedback } =
+    useContext(FeedbackContext);
   const [text, setText] = useState("");
   const [isDisabled, setIsDisabled] = useState(true);
   const [message, setMessage] = useState("");
@@ -43,7 +44,13 @@ const FeedbackForm = () => {
         text,
         rating,
       };
-      addFeedback(newFeedback);
+
+      if (feedbackEdit.edit === true) {
+        updateFeedback(feedbackEdit.item.id, newFeedback);
+      } else {
+        addFeedback(newFeedback);
+      }
+
       setText("");
     }
   };
