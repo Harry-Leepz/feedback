@@ -41,11 +41,8 @@ function App() {
                 element={
                   <>
                     <FeedbackForm onAddItem={addItemHandler} />
-                    <FeedbackStats data={feedback} />
-                    <FeedbackList
-                      data={feedback}
-                      onDeleteItem={deleteItemHandler}
-                    />
+                    <FeedbackStats />
+                    <FeedbackList onDeleteItem={deleteItemHandler} />
                     <AboutIconLink />
                   </>
                 }
