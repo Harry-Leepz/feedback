@@ -1,9 +1,13 @@
-const FeedbackStats = ({ data }) => {
+import { useContext } from "react";
+import FeedbackContext from "../context/FeedbackContext";
+
+const FeedbackStats = () => {
+  const { feedback } = useContext(FeedbackContext);
   // Calculate average ratings
   let average =
-    data.reduce((acc, current) => {
+    feedback.reduce((acc, current) => {
       return acc + current.rating;
-    }, 0) / data.length;
+    }, 0) / feedback.length;
 
   // set avergae to one deciaml place and
   // have any .0 replace by a single figure
@@ -11,7 +15,7 @@ const FeedbackStats = ({ data }) => {
 
   return (
     <div className='feedback-stats'>
-      <h4> {data.length} Reviews</h4>
+      <h4> {feedback.length} Reviews</h4>
       <h4> Average Rating: {isNaN(average) ? 0 : average}</h4>
     </div>
   );
