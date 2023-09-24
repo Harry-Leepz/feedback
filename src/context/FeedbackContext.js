@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from "uuid"; // generate custom id for adding new feedba
 const FeedbackContext = createContext();
 
 export const FeedbackProvider = ({ children }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [feedback, setFeedback] = useState([]);
   const [feedbackEdit, setFeedbackEdit] = useState({
     item: {},
@@ -16,9 +17,11 @@ export const FeedbackProvider = ({ children }) => {
 
   // fetch feedback
   const fetchFeedbackData = async () => {
+    setIsLoading(true);
     const response = await fetch("http://localhost:3001/feedback");
     const data = await response.json();
     setFeedback(data);
+    setIsLoading(false);
   };
 
   // delete a feedback item
@@ -63,6 +66,7 @@ export const FeedbackProvider = ({ children }) => {
         editFeedback,
         feedbackEdit,
         updateFeedback,
+        isLoading,
       }}
     >
       {children}
