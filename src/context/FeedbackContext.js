@@ -1,15 +1,25 @@
-import { useState, createContext } from "react";
+import { useState, createContext, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid"; // generate custom id for adding new feedback
-import FeedbackData from "../data/FeedbackData";
 
 const FeedbackContext = createContext();
 
 export const FeedbackProvider = ({ children }) => {
-  const [feedback, setFeedback] = useState(FeedbackData);
+  const [feedback, setFeedback] = useState([]);
   const [feedbackEdit, setFeedbackEdit] = useState({
     item: {},
     edit: false,
   });
+
+  useEffect(() => {
+    fetchFeedbackData();
+  }, []);
+
+  // fetch feedback
+  const fetchFeedbackData = async () => {
+    const response = await fetch("http://localhost:3001/feedback");
+    const data = await response.json();
+    setFeedback(data);
+  };
 
   // delete a feedback item
   const deleteFeedback = (id) => {
