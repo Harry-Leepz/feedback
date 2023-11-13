@@ -1,5 +1,4 @@
 import { useState, createContext, useEffect } from "react";
-import { v4 as uuidv4 } from "uuid"; // generate custom id for adding new feedback
 
 const FeedbackContext = createContext();
 
@@ -18,7 +17,7 @@ export const FeedbackProvider = ({ children }) => {
   // fetch feedback
   const fetchFeedbackData = async () => {
     setIsLoading(true);
-    const response = await fetch("http://localhost:3001/feedback");
+    const response = await fetch("/feedback");
     const data = await response.json();
     setFeedback(data);
     setIsLoading(false);
@@ -34,10 +33,18 @@ export const FeedbackProvider = ({ children }) => {
   };
 
   // add feedback
-  const addFeedback = (newFeedback) => {
-    newFeedback.id = uuidv4();
+  const addFeedback = async (newFeedback) => {
+    const response = await fetch("/feedback", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newFeedback),
+    });
+
+    const data = await response.json();
     // using spread operator to add the new feedback to the previous state
-    setFeedback([newFeedback, ...feedback]);
+    setFeedback([data, ...feedback]);
   };
 
   // set item to be updated
